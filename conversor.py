@@ -3,9 +3,9 @@ import time
 import conexao
 import pyodbc
 
-
+tabela_sql = "PROGRAMA"
 #arquivo XML
-xml_file = r"C:\Users\W5IRamon\Desktop\PRODUTO.xml"
+xml_file = rf"C:\Users\W5IRamon\Desktop\{tabela_sql}.xml"
 
 def importar_xml_para_sql(xml_file, tabela):
     conn = None
@@ -18,7 +18,7 @@ def importar_xml_para_sql(xml_file, tabela):
             root = tree.getroot()
 
             #ex: tag <PATRIMONIO>
-            for patrimonio in root.findall(".//PRODUTO"):
+            for patrimonio in root.findall(rf".//{tabela_sql}"):
                 colunas = []
                 valores = []
 
@@ -47,6 +47,6 @@ def importar_xml_para_sql(xml_file, tabela):
             conn.close()
             print("Conexão fechada.")
 
-tabela_sql = "PRODUTO"
+
 
 importar_xml_para_sql(xml_file, tabela_sql)
